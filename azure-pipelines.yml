@@ -9,13 +9,23 @@ trigger:
 variables:
 
   # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: '4c8e7db9-7472-409e-8b5a-49c63cab73e1'
+  # azureSubscription: '4c8e7db9-7472-409e-8b5a-49c63cab73e1'
   
   # Web app name
   webAppName: 'java-spring-boot'
 
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  vmImageName:  satishnew
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
 
 stages:
 - stage: Build
